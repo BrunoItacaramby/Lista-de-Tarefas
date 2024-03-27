@@ -43,6 +43,7 @@ button {
     padding: 2.5px 20px;
     font-size: 25px;
     margin-left: 25px;
+    border-radius: 15px;
 }
 
 input {
