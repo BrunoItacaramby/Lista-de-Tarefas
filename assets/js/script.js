@@ -7,12 +7,12 @@ function criaLi() {
     return li
 }
 
-function limpaInput () {
+function limpaInput() {
     inputTarefa.value = ''
     inputTarefa.focus()
 }
 
-function criaTarefa(inputTexto){
+function criaTarefa(inputTexto) {
     const li = criaLi()
     li.innerText = inputTexto
     tarefas.appendChild(li)
@@ -29,35 +29,34 @@ function criaBotaoApagar(li) {
     li.appendChild(botaoApagar)
 }
 
-document.addEventListener('click', function(event){
+document.addEventListener('click', function (event) {
     const element = event.target
-    if(element.classList.contains('apagar')){
+    if (element.classList.contains('apagar')) {
         element.parentElement.remove()
         salvarTarefas()
     }
 })
 
-inputTarefa.addEventListener('keypress', function(event){
-    if(event.keyCode === 13){
-        if(!inputTarefa.value) return3
+inputTarefa.addEventListener('keypress', function (event) {
+    if (event.keyCode === 13) {
+        if (!inputTarefa.value) return3
         criaTarefa(inputTarefa.value)
     }
 })
 
-btnTarefa.addEventListener('click', function(){
-    if(!inputTarefa.value) return
+btnTarefa.addEventListener('click', function () {
+    if (!inputTarefa.value) return
     criaTarefa(inputTarefa.value)
 })
 
 function salvarTarefas() {
     const tarefasLi = tarefas.querySelectorAll('li')
     let listaDeTarefas = []
-    
 
     for (const tarefa of tarefasLi) {
         let tarefaTexto = tarefa.innerText
         tarefaTexto = tarefaTexto.replace('Apagar', '').trim();
-        listaDeTarefas.push(tarefaTexto)           
+        listaDeTarefas.push(tarefaTexto)
     }
     const tarefasJSON = JSON.stringify(listaDeTarefas)
     localStorage.setItem('tarefas', tarefasJSON)

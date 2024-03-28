@@ -7,15 +7,15 @@ function criaLi() {
     return li
 }
 
-inputTarefa.addEventListener('keypress', function(event){
-    if(event.keyCode === 13){
-        if(!inputTarefa.value) return
+inputTarefa.addEventListener('keypress', function (event) {
+    if (event.keyCode === 13) {
+        if (!inputTarefa.value) return
         criaTarefa(inputTarefa.value);
     }
-    
+
 })
 
-function criaBotaoApagar(li){
+function criaBotaoApagar(li) {
     li.innerText += ' '
     const botaoApagar = document.createElement('button')
     botaoApagar.innerText = 'Apagar'
@@ -24,33 +24,33 @@ function criaBotaoApagar(li){
     li.appendChild(botaoApagar)
 }
 
-document.addEventListener('click', function(event){
+document.addEventListener('click', function (event) {
     const element = event.target
 
-    if(element.classList.contains('apagar')){
+    if (element.classList.contains('apagar')) {
         element.parentElement.remove()
     }
 })
 
-function limpaInput(){
+function limpaInput() {
     inputTarefa.value = ''
     inputTarefa.focus()
 }
 
-function criaTarefa(textoInput){
+function criaTarefa(textoInput) {
     const li = criaLi()
     li.innerText = textoInput
     tarefas.appendChild(li)
     limpaInput()
-    criaBotaoApagar(li)  
-    salvarTarefas() 
+    criaBotaoApagar(li)
+    salvarTarefas()
 }
 
-function salvarTarefas(){
+function salvarTarefas() {
     const liTarefas = tarefas.querySelectorAll('li')
     let listaDeTarefas = []
 
-    for(let tarefa of liTarefas) {
+    for (let tarefa of liTarefas) {
         let tarefaTexto = tarefa.innerText
         tarefaTexto = tarefaTexto.replace('Apagar', '').trim();
         listaDeTarefas.push(tarefaTexto)
@@ -64,14 +64,14 @@ function adicionaTarefasSalvas() {
     const tarefas = localStorage.getItem('tarefas');
     const listaDeTarefas = JSON.parse(tarefas)
 
-    for(let tarefa of listaDeTarefas){
+    for (let tarefa of listaDeTarefas) {
         criaTarefa(tarefa)
     }
 }
 
-btnTarefa.addEventListener('click', function(){
-    if(!inputTarefa.value) return
+btnTarefa.addEventListener('click', function () {
+    if (!inputTarefa.value) return
     criaTarefa(inputTarefa.value);
-    
+
 })
 adicionaTarefasSalvas()
